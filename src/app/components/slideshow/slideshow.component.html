@@ -3,7 +3,10 @@
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
         <!-- Slides -->
-        <div *ngFor="let movie of movies" class="swiper-slide">
+        <div *ngFor="let movie of movies" class="swiper-slide" [ngStyle]="{
+                  'background-size': 'cover',
+                  'background-image': 'url(https://image.tmdb.org/t/p/w500'+ movie.backdrop_path +')'
+              }">
             <div class="movie-description">
                 <h3>{{ movie.title }}</h3>
                 <p>
@@ -20,8 +23,8 @@
     <div class="swiper-pagination"></div>
 
     <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <div (click)="onSlidePrev()" class="swiper-button-prev"></div>
+    <div (click)="onSlideNext()" class="swiper-button-next"></div>
 
     <!-- If we need scrollbar -->
     <div class="swiper-scrollbar"></div>

@@ -11,12 +11,14 @@ import { Swiper } from 'swiper';
 export class SlideshowComponent implements OnInit, AfterViewInit {
 
   @Input() public movies: Movie[] = [];
+  public backgroundImage: string;
+  public mySwiper: Swiper;
 
   constructor() { }
 
   ngAfterViewInit(): void {
 
-    var mySwiper = new Swiper('.swiper-container', {
+    this.mySwiper = new Swiper('.swiper-container', {
       // Optional parameters      
       loop: true,
     
@@ -30,6 +32,15 @@ export class SlideshowComponent implements OnInit, AfterViewInit {
     // this.movies[0].title
     
     
+    
+  }
+
+  onSlideNext(){
+    this.mySwiper.slideNext( 1200, false );
+  }
+
+  onSlidePrev(){
+    this.mySwiper.slidePrev( 1200, false );
   }
 
 }
