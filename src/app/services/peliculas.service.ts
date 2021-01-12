@@ -10,7 +10,7 @@ import { tap } from "rxjs/operators";
 export class PeliculasService {
 
   private baseUrl: string = 'https://api.themoviedb.org/3';
-  private carteleraPage = 1;
+  private carteleraPage = 1;  
 
   constructor( private http: HttpClient  ) { }
 
@@ -23,13 +23,23 @@ export class PeliculasService {
   }
 
   getCartelera():Observable<CarteleraResponse>{
-
+    // console.log(this.carteleraPage);    
+    // let observableCartelera: Observable<CarteleraResponse> = this.http.get<CarteleraResponse>(`${this.baseUrl}/movie/now_playing?`,{
+    //   params: this.params
+    // });
+    // this.carteleraPage++;
+    
+    // return observableCartelera;
+    
+    
+    console.log("cargando pagina: " + this.carteleraPage);
     return this.http.get<CarteleraResponse>(`${this.baseUrl}/movie/now_playing?`,{
-      params: this.params
-    }).pipe(
-      tap( () => {
-        this.carteleraPage += 1;
-      })
-    );
-  }
+        params: this.params
+      }).pipe(
+          tap( () => {                    
+            this.carteleraPage++;
+             
+          })
+      );
+    }
 }
