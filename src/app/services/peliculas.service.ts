@@ -1,18 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CarteleraResponse } from '../interfaces/cartelera-response';
-import { tap } from "rxjs/operators";
+import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
+import { map, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PeliculasService {
+export class PeliculasService implements OnInit {
 
   private baseUrl: string = 'https://api.themoviedb.org/3';
-  private carteleraPage = 1;  
+  private carteleraPage: number;  
 
-  constructor( private http: HttpClient  ) { }
+  constructor( private http: HttpClient  ) {
+    this.carteleraPage = 1;
+   }
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   get params() {
     return  {
@@ -42,4 +48,19 @@ export class PeliculasService {
           })
       );
     }
+
+   buscarPeliculas( textoBuscar: string ): Observable<Movie[]> {
+     const params = { ...this.params, page: '1', query: textoBuscar };
+
+      // https://api.themoviedb.org/3/search/movie?api_key=e97743a8e47b50c18195f4f928c36480&language=es-ES&query=sirenita&page=1&include_adult=false
+      return this.http.get<CarteleraResponse>(`${this.baseUrl}/search/movie`,{
+        params: params
+      }).pipe(
+        map( resp => resp.results )
+      )
+
+
+   }
+
+
 }
