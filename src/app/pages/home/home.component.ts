@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Movie } from 'src/app/interfaces/cartelera-response';
 import { PeliculasService } from 'src/app/services/peliculas.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
   }
 
   @HostListener( 'window:scroll', ['$event'] )
-  onScroll(){
+   onScroll(){
     const positionScroll = (document.documentElement.scrollTop || document.body.scrollTop) ;
     const positionMaxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight) ;
     let endScroll: boolean = false;  
@@ -42,9 +43,6 @@ export class HomeComponent implements OnInit {
 
     if(DOMRect.top === 0)
     console.log("start Scroll");
-    
-    
-    
     
     
   }

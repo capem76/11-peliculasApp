@@ -1,1 +1,9 @@
-<p>buscar works!</p>
+<h1 >Buscar peliculas: <small>{{textoBuscar}}</small></h1>
+<h3>total result: <small *ngIf="carteleraResponse != undefined ">{{carteleraResponse.total_results}}</small></h3>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-peliculas-poster-grid [movies]="movies" *ngIf="movies.length > 0"></app-peliculas-poster-grid>
+    </div>
+
+</div>

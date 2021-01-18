@@ -7,19 +7,17 @@ import { map, tap } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class PeliculasService implements OnInit {
+export class PeliculasService {
 
   private baseUrl: string = 'https://api.themoviedb.org/3';
   private carteleraPage: number;  
+  private moviesPage: number = 1;
 
   constructor( private http: HttpClient  ) {
     this.carteleraPage = 1;
    }
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
+  
   get params() {
     return  {
       api_key: 'e97743a8e47b50c18195f4f928c36480',
@@ -49,14 +47,16 @@ export class PeliculasService implements OnInit {
       );
     }
 
-   buscarPeliculas( textoBuscar: string ): Observable<Movie[]> {
-     const params = { ...this.params, page: '1', query: textoBuscar };
-
+   buscarPeliculas( textoBuscar: string, pageSolicitada: number ): Observable<CarteleraResponse> {
+     
+     const params = { ...this.params, page: pageSolicitada.toString(), query: textoBuscar };
+     
+     
       // https://api.themoviedb.org/3/search/movie?api_key=e97743a8e47b50c18195f4f928c36480&language=es-ES&query=sirenita&page=1&include_adult=false
       return this.http.get<CarteleraResponse>(`${this.baseUrl}/search/movie`,{
         params: params
       }).pipe(
-        map( resp => resp.results )
+        map( resp => resp )        
       )
 
 
