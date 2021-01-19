@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 import { map, tap } from "rxjs/operators";
+import { MovieDetailsResponse } from '../interfaces/movie-details-response';
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +63,17 @@ export class PeliculasService {
 
    }
 
+
+  resetCarteleraPage(){
+    this.carteleraPage = 1;
+  }
+
+  getPeliculasDetalle( idMovie: string ){
+    // https://api.themoviedb.org/3/movie/508442?api_key=e97743a8e47b50c18195f4f928c36480&language=es-ES
+    return this.http.get<MovieDetailsResponse>(`${ this.baseUrl }/movie/${ idMovie }`,{
+      params: this.params
+    });
+
+  }
 
 }

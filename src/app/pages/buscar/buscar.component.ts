@@ -18,8 +18,10 @@ export class BuscarComponent implements OnInit {
   public totalMovies: number = 0;
   public totalPage: number = 0;
   public actualPage: number = 1;
+  public paginaSiguiente: number = 2;
   public carteleraResponse: CarteleraResponse;
   public isFinDePaginas: boolean = false;
+  private paginaInicial: number = 1;
 
   constructor( private activatedRoute: ActivatedRoute,
                private peliculasServices: PeliculasService,
@@ -28,13 +30,19 @@ export class BuscarComponent implements OnInit {
   ngOnInit(): void {
     // this.textoBuscar = this.activatedRoute.snapshot.params['texto'];
     
-    
     this.activatedRoute.params.subscribe( params => {    
-      this.peliculasServices.buscarPeliculas( params.texto, this.actualPage ).subscribe( carteleraResponse => {
+      this.textoBuscar = params.texto;
+      this.inicializarVariablesGlobales();
+      
+
+
+      this.peliculasServices.buscarPeliculas( params.texto, this.paginaInicial ).subscribe( carteleraResponse => {
         console.log(carteleraResponse);
-        this.textoBuscar = params.texto;
         this.movies = carteleraResponse.results;                
         this.carteleraResponse = carteleraResponse;
+        this.totalPage = carteleraResponse.total_pages;        
+        
+        
 
       })
     });
@@ -51,27 +59,35 @@ export class BuscarComponent implements OnInit {
      const bottomMax: number = Number(DOMRect.bottom.toFixed());
           
      
-     endScroll = (positionMaxScroll-positionScroll) === document.documentElement.clientHeight ? true : false;
-     // console.log(endScroll);
+     endScroll = (positionMaxScroll-positionScroll) === document.documentElement.clientHeight ? true : false;    
    
      if (endScroll && !this.isFinDePaginas) {       
        console.log('fin scroll');
        //llamar servicio solo si aun faltan paginas por mostrar       
-       this.peliculasServices.buscarPeliculas(this.textoBuscar, this.actualPage).subscribe( (resp) => {
+       this.actualPage++;
+       console.log(`busco pagina: ${this.paginaSiguiente}` );       
+       this.peliculasServices.buscarPeliculas(this.textoBuscar, this.paginaSiguiente).subscribe( (resp) => {
          this.movies.push(...resp.results);
-         this.actualPage = resp.page;
-         this.totalPage = resp.total_pages;     
-         this.actualPage++;
-         this.isFinDePaginas = this.totalPage === this.actualPage? true : false;
-         console.log(`pagina total: ${this.totalPage} \n pagina actual: ${this.actualPage} \n fin paginas: ${this.isFinDePaginas}`);
-
+         this.actualPage = resp.page; 
+         this.paginaSiguiente = this.actualPage + 1;        
+         this.isFinDePaginas = this.actualPage >= this.totalPage ? true : false;         
+         console.log(`pagina total: ${this.totalPage} \n pagina actual: ${this.actualPage} \n fin paginas: ${this.isFinDePaginas}`);  
   
-  
-       } )
-       
+       } )       
        
      
      }
+
+
+  }
+
+  inicializarVariablesGlobales(){
+    this.paginaInicial = 1;
+    this.actualPage = 1;
+    this.paginaSiguiente = 2;
+    this.isFinDePaginas = false;
+
+
   }
 
   
