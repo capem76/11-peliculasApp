@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 import { map, tap } from "rxjs/operators";
 import { MovieDetailsResponse } from '../interfaces/movie-details-response';
+import { Cast, CreditsResponse } from '../interfaces/credits-response';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +74,16 @@ export class PeliculasService {
     return this.http.get<MovieDetailsResponse>(`${ this.baseUrl }/movie/${ idMovie }`,{
       params: this.params
     });
+
+  }
+
+  getCast( idMovie: string ){
+    https://api.themoviedb.org/3/movie/464052/credits?api_key=e97743a8e47b50c18195f4f928c36480&language=es-ES&movie_id=464052
+    return this.http.get<CreditsResponse>(`${ this.baseUrl }/movie/${ idMovie }/credits`,{
+      params: this.params
+    }).pipe(
+      map( resp => resp.cast )
+    );
 
   }
 
