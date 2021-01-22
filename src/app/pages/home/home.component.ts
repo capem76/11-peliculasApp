@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public map = new Map();
   public movies: Movie[] = [];
   public MovieSlideshow: Movie[] = [];
+
   
   
 
@@ -29,13 +30,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     const bottomMax: number = Number(DOMRect.bottom.toFixed());
     
     endScroll = (positionMaxScroll-positionScroll) === document.documentElement.clientHeight ? true : false;
-    // console.log(endScroll);
+    console.log(`position scroll: ${positionScroll}`);
   
     if (endScroll) {
-      console.log('fin scroll');
+      console.log(`fin scroll \n position: ${positionScroll}`);      
       //llamar servicio
       this.peliculasService.getCartelera().subscribe( (resp) => {
         this.movies.push(...resp.results);
+
 
 
       } )
@@ -64,5 +66,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.peliculasService.resetCarteleraPage();
   }
+
+  guardoDatosSesionStorage(  ){
+
+  }
+
+ 
 
 }
