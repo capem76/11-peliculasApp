@@ -29,11 +29,13 @@ export class PeliculasService {
     }
   }
 
-  getCartelera():Observable<CarteleraResponse>{
+  getCartelera( paginaActual: number ):Observable<CarteleraResponse>{
     
-    console.log("cargando pagina: " + this.carteleraPage);
+    const params = {  ...this.params, page: paginaActual.toString() }
+
+    console.log("paginaActual: " + paginaActual);
     return this.http.get<CarteleraResponse>(`${this.baseUrl}/movie/now_playing?`,{
-        params: this.params
+        params: params
       }).pipe(
           tap( () => {                    
             this.carteleraPage++;
