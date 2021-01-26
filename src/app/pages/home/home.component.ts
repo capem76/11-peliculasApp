@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Movie } from 'src/app/interfaces/cartelera-response';
 import { HomeSession } from 'src/app/interfaces/home-sesion';
@@ -25,12 +26,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
   
   
 
-  constructor( private peliculasService: PeliculasService ) { 
-  }
+  constructor( private peliculasService: PeliculasService,
+               private viewportScroller: ViewportScroller ) { }
+
 
   @HostListener( 'window:beforeunload', ['$event'] )
-  unloadHandler( event: Event ){
-    alert("refreshing");
+  unloadHandler( event: Event ){ 
+    // $event.returnValue='Your data will be lost!';   
     sessionStorage.clear();
     
     
@@ -86,8 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
       
       this.jsonObject = JSON.parse( this.getDatosSessionStorage('homeParameters') );                  
       this.parametrosHome = <HomeSession>this.jsonObject.homesession;
-      console.log(`obtengo la cartelera de la session:`);      
-      console.log( this.parametrosHome );
+      console.log(`obtengo la cartelera de la session:`);            
       this.movies = this.parametrosHome.movies;
       
       
@@ -96,6 +97,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
     
       
     }
+    console.log(this.parametrosHome);
+    
 
       
 
@@ -105,6 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
   ngAfterViewInit(): void {
     // window.scrollTo(0, 900);
     // console.log(`After wiew init -- scrollTo`)
+    
     
   }
 
@@ -127,6 +131,20 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
     sessionStorage.setItem('homeParameters', homeParameters);
     
   }
+
+
+  onClickPeliculaVisitada( idPelicula: number ){
+
+
+    // var anchorMovieId = this.getDatosSessionStorage('homeParameters') != null ? this.movieGridParameters.movieIndexClick : 0 ;   
+    // var anchorMovieId = this.movieGridParameters.movieIndexClick ;
+    this.viewportScroller.scrollToAnchor( 'anchor_' + idPelicula);
+    console.log(`After wiew init -- scroll to ${'anchor_' + idPelicula} `);      
+
+
+ 
+
+}
 
   
 

@@ -4,6 +4,13 @@
 <app-slideshow [movies]="movies" *ngIf="movies.length > 0"></app-slideshow>
 
 <h1 class="mt-5">Peliculas</h1>
+<!-- <a (click)=onClickPeliculaVisitada(parametrosHome.movieIndexClick) *ngIf="parametrosHome.movieIndexClick != null" > pelicula visitada anterior </a> -->
+<button type="button" 
+        class="btn btn-outline-primary" 
+        (click)=onClickPeliculaVisitada(parametrosHome.movieIndexClick) 
+        *ngIf="parametrosHome.movieIndexClick != null">
+        ir a film visitado: {{ movies[ parametrosHome.movieIndexClick ].title }}
+</button>
 
 <app-peliculas-poster-grid  [movieGridParameters]="parametrosHome" 
                             [movies]="movies" 
