@@ -5,6 +5,7 @@ import { PeliculasService } from 'src/app/services/peliculas.service';
 import { StarRatingComponent } from "ng-starrating";
 import { Location } from '@angular/common';
 import { Cast } from 'src/app/interfaces/credits-response';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-pelicula',
@@ -24,20 +25,24 @@ export class PeliculaComponent implements OnInit {
   ngOnInit(): void {
     // desestructuracion:
     // const { id } = this.activatedRoute.snapshot.params;
-    const  idMovie  = this.activatedRoute.snapshot.params.id;    
-    this.peliculasService.getPeliculasDetalle( idMovie ).subscribe( movieDetailsResponse => {
-      if ( !movieDetailsResponse) {
-        this.router.navigateByUrl('/home');
-        return;
+    const  idMovie  = this.activatedRoute.snapshot.params.id;  
+
+    combineLatest([
+
+      this.peliculasService.getPeliculasDetalle( idMovie ),
+      this.peliculasService.getCast( idMovie )
+
+    ]).subscribe( ( [ peliculaResponse, castResponse ] ) => {      
+      if ( !peliculaResponse) {
+            this.router.navigateByUrl('/home');
+            return;
       }
-      this.movieDetails = movieDetailsResponse;      
-
-    });
-
-    this.peliculasService.getCast( idMovie ).subscribe( cast => {      
-      this.cast = cast.filter( actor => actor.profile_path != null );
+      this.movieDetails = peliculaResponse;      
+      this.cast = castResponse.filter( actor => actor.profile_path != null );
       
-    });
+      
+    } );
+
     
   }
 
