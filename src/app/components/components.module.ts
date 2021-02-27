@@ -7,24 +7,37 @@ import { PeliculasPosterGridComponent } from './peliculas-poster-grid/peliculas-
 import { RatingModule } from "ng-starrating";
 import { PipesModule } from '../pipes/pipes.module';
 import { CastSlideShowComponent } from './cast-slide-show/cast-slide-show.component';
+// scrolling
+import { ScrollingModule } from "@angular/cdk/scrolling";
+import { PeliculasGrid2Component } from './peliculas-grid2/peliculas-grid2.component';
+import { PeliculaCardComponent } from './pelicula-card/pelicula-card.component';
+import {MatCardModule} from '@angular/material/card';
+
+
 
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent],
+  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent, PeliculasGrid2Component, PeliculaCardComponent],
   imports: [
     CommonModule,
     RouterModule,
     RatingModule,
-    PipesModule
+    PipesModule,
+    ScrollingModule,
+    MatCardModule
+    
+
 
   ],
   exports: [
     NavbarComponent,
     SlideshowComponent,
     PeliculasPosterGridComponent,
-    CastSlideShowComponent
+    CastSlideShowComponent,
+    PeliculasGrid2Component,
+    PeliculaCardComponent
   ]
 })
 export class ComponentsModule { }

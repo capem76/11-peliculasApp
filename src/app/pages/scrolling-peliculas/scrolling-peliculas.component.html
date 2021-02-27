@@ -1,0 +1,26 @@
+<h1>Cartelera</h1>
+
+<!-- <div (window:beforeunload)="unloadHandler"></div> -->
+<app-slideshow [movies]="movies" *ngIf="movies.length > 0"></app-slideshow>
+
+<h1 class="mt-5">Peliculas</h1>
+
+<div class="container">
+
+    <cdk-virtual-scroll-viewport itemSize="100">
+    
+        <ng-container *cdkVirtualFor="let movie of movies" class="viewport">
+    
+            <app-pelicula-card [pelicula]="movie">
+        
+            </app-pelicula-card>
+    
+        </ng-container>
+        
+    </cdk-virtual-scroll-viewport>
+
+</div>
+
+
+
+

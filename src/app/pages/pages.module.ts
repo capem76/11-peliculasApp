@@ -6,17 +6,29 @@ import { BuscarComponent } from './buscar/buscar.component';
 import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { RatingModule } from 'ng-starrating';
+import { ScrollingPeliculasComponent } from './scrolling-peliculas/scrolling-peliculas.component';
+//scrolling
+import { ScrollingModule } from "@angular/cdk/scrolling";
+//Material
+import { MaterialModule } from "../material/material.module";
+import { MaterialExampleComponent } from './material-example/material-example.component';
+
+
+
 
 
 
 
 @NgModule({
-  declarations: [HomeComponent, PeliculaComponent, BuscarComponent],
+  declarations: [HomeComponent, PeliculaComponent, BuscarComponent, ScrollingPeliculasComponent, MaterialExampleComponent],
   imports: [
     CommonModule,
     ComponentsModule,
     PipesModule,
-    RatingModule
+    RatingModule,
+    ScrollingModule,
+    MaterialModule
+
     
   ]
 })

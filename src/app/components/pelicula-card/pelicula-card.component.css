@@ -1,0 +1,12 @@
+mat-card {
+    height: 100px;
+    margin: 2em;
+    background-color: #1B264F;
+    color: white;
+  }
+
+.example-header-image {
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
+    background-size: cover;
+    
+  }
