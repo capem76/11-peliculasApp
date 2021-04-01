@@ -12,7 +12,6 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 //Material
 import { MaterialModule } from "../material/material.module";
 import { MaterialExampleComponent } from './material-example/material-example.component';
-import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 
@@ -28,8 +27,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     PipesModule,
     RatingModule,
     ScrollingModule,
-    MaterialModule,
-    FlexLayoutModule
+    MaterialModule
 
     
   ]
