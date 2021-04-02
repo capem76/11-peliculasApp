@@ -12,6 +12,8 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 //Material
 import { MaterialModule } from "../material/material.module";
 import { MaterialExampleComponent } from './material-example/material-example.component';
+//Shared
+import { SharedModuleModule } from '../shared-module/shared-module.module';
 
 
 
@@ -27,7 +29,8 @@ import { MaterialExampleComponent } from './material-example/material-example.co
     PipesModule,
     RatingModule,
     ScrollingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModuleModule
 
     
   ]

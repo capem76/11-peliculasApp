@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,10 @@ export class AppComponent {
 
   title = 'peliculasApp';
 
-  constructor( ){}
+  constructor( public translate: TranslateService  ){
+    this.translate.addLangs(['es', 'en', 'fr']);
+    this.translate.setDefaultLang('es');
+    this.translate.use('fr');
+  }
 
 }

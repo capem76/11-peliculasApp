@@ -9,7 +9,7 @@
         class="btn btn-outline-primary mb-1" 
         (click)=onClickPeliculaVisitada(parametrosHome.movieIndexClick) 
         *ngIf="parametrosHome.movieIndexClick != null">
-        ir a film visitado: {{ movies[ parametrosHome.movieIndexClick ].title }}
+        {{ 'home.btnFilmVisitado'|translate }}: {{ movies[ parametrosHome.movieIndexClick ].title }}
 </button>
 
 <app-peliculas-poster-grid  [movieGridParameters]="parametrosHome" 
