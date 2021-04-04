@@ -1,6 +1,12 @@
 {
     "hello": "salut monde",
     "home": {
-       "btnFilmVisitado": "derniere film vu "
+       "btnFilmVisitado": "derniere film vu ",
+       "cartelera": "panneau d'affichage",
+       "peliculas": "films"
+    },
+    "navbar":{
+        "link.peliculas": "films",
+        "input.buscar": "chercher des films"
     }
 }

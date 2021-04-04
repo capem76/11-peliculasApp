@@ -12,6 +12,10 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { PeliculasGrid2Component } from './peliculas-grid2/peliculas-grid2.component';
 import { PeliculaCardComponent } from './pelicula-card/pelicula-card.component';
 import {MatCardModule} from '@angular/material/card';
+//shared
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+
+
 
 
 
@@ -26,7 +30,8 @@ import {MatCardModule} from '@angular/material/card';
     RatingModule,
     PipesModule,
     ScrollingModule,
-    MatCardModule
+    MatCardModule,
+    SharedModuleModule
     
 
 
