@@ -1,5 +1,5 @@
-<h1 >Buscar peliculas: <small>{{textoBuscar}}</small></h1>
-<h3>total result: <small *ngIf="carteleraResponse != undefined ">{{carteleraResponse.total_results}}</small></h3>
+<h1 >{{ "buscar.buscarPeliculas"| translate }} <small>{{textoBuscar}}</small></h1>
+<h3>{{ "buscar.totalResult"| translate }}: <small *ngIf="carteleraResponse != undefined ">{{carteleraResponse.total_results}}</small></h3>
 <hr>
 <div class="row">
     <div class="col">

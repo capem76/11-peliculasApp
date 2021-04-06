@@ -87,8 +87,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
     }else{      
       
       this.jsonObject = JSON.parse( this.getDatosSessionStorage('homeParameters') );                  
-      this.parametrosHome = <HomeSession>this.jsonObject.homesession;
-      console.log(`obtengo la cartelera de la session:`);            
+      this.parametrosHome = <HomeSession>this.jsonObject.homesession;    
       this.movies = this.parametrosHome.movies;
       
       
@@ -97,18 +96,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
     
       
     }
-    console.log(this.parametrosHome);
     
-
-      
-
 
   }
 
   ngAfterViewInit(): void {
-    // window.scrollTo(0, 900);
-    // console.log(`After wiew init -- scrollTo`)
-    
     
   }
 
@@ -135,13 +127,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
 
   onClickPeliculaVisitada( idPelicula: number ){
 
-
-    // var anchorMovieId = this.getDatosSessionStorage('homeParameters') != null ? this.movieGridParameters.movieIndexClick : 0 ;   
-    // var anchorMovieId = this.movieGridParameters.movieIndexClick ;
     this.viewportScroller.scrollToAnchor( 'anchor_' + idPelicula);
-    console.log(`After wiew init -- scroll to ${'anchor_' + idPelicula} `);      
-
-
  
 
 }

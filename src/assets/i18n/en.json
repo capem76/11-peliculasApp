@@ -1,3 +1,20 @@
 {
-    "hello": "Hello world"
+    "home": {
+       "btnFilmVisitado": "last film seen",
+       "cartelera": "movie listings",
+       "peliculas": "movies"
+    },
+    "navbar":{
+        "link.peliculas": "movies",
+        "input.buscar": "search film",
+        "btn.buscar": "search"
+    },
+    "buscar": {
+        "buscarPeliculas": "search films",
+        "totalResult": "results"
+
+    },
+    "pelicula": {
+        "btn.regresar": "back"
+    }
 }

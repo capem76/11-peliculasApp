@@ -18,12 +18,12 @@
                         (keyup.enter)="buscarPelicula( txtBuscar.value ) "
                         class="form-control me-2" 
                         type="search" 
-                        placeholder="Buscar Pelicula" 
+                        [placeholder]="inputBuscar" 
                         aria-label="Search">
 
                 <button (click)="buscarPelicula( txtBuscar.value ) "
                         class="btn btn-outline-success" 
-                        type="submit">Buscar
+                        type="submit">{{ 'navbar.btn.buscar' |translate }}
                 </button>
             </div>
         </div>

@@ -6,6 +6,7 @@ import { StarRatingComponent } from "ng-starrating";
 import { Location } from '@angular/common';
 import { Cast } from 'src/app/interfaces/credits-response';
 import { combineLatest } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pelicula',
@@ -20,7 +21,8 @@ export class PeliculaComponent implements OnInit {
   constructor( private activatedRoute: ActivatedRoute,
                private peliculasService: PeliculasService,
                private location: Location,
-               private router: Router ) { }
+               private router: Router,
+               private translate: TranslateService ) { }
 
   ngOnInit(): void {
     // desestructuracion:
@@ -56,5 +58,14 @@ export class PeliculaComponent implements OnInit {
   onRegresar(){
     this.location.back();
   }
+
+  translateContenido( ): void {    
+    this.translate.get('navbar').subscribe( ( navbarValores: string) => {              
+      // this.inputBuscar =   navbarValores['input.buscar'];       
+       
+     });
+
+  } 
+
 
 }
