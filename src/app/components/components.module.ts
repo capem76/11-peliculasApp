@@ -14,6 +14,7 @@ import { PeliculaCardComponent } from './pelicula-card/pelicula-card.component';
 import {MatCardModule} from '@angular/material/card';
 //shared
 import { SharedModuleModule } from '../shared-module/shared-module.module';
+import { TranslationComponent } from './translation/translation.component';
 
 
 
@@ -23,7 +24,7 @@ import { SharedModuleModule } from '../shared-module/shared-module.module';
 
 
 @NgModule({
-  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent, PeliculasGrid2Component, PeliculaCardComponent],
+  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent, PeliculasGrid2Component, PeliculaCardComponent, TranslationComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -42,7 +43,8 @@ import { SharedModuleModule } from '../shared-module/shared-module.module';
     PeliculasPosterGridComponent,
     CastSlideShowComponent,
     PeliculasGrid2Component,
-    PeliculaCardComponent
+    PeliculaCardComponent,
+    TranslationComponent
   ]
 })
 export class ComponentsModule { }

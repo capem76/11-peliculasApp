@@ -26,14 +26,13 @@ hr {
     color: #bd4c5f !important;
 }
 
-.btn-outline-success {
-    border-color: #bd4c5f !important;
-    ;
-    color: #bd4c5f !important;
-    ;
+.btn-outline-danger{
+    border-color: #bd4c5f !important;    
+    color: #bd4c5f !important;    
 }
 
-.btn-outline-success:hover {
+
+.btn-outline-danger:hover {
     background-color: #272a36;
     color: white !important;
 }
