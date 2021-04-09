@@ -1,8 +1,9 @@
 import { ViewportScroller } from '@angular/common';
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Movie } from 'src/app/interfaces/cartelera-response';
 import { HomeSession } from 'src/app/interfaces/home-sesion';
 import { PeliculasService } from 'src/app/services/peliculas.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -23,18 +24,14 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
 
   
 
-  
-  
-
   constructor( private peliculasService: PeliculasService,
-               private viewportScroller: ViewportScroller ) { }
+               private viewportScroller: ViewportScroller,
+               public translateService: TranslateService ) { }
 
 
   @HostListener( 'window:beforeunload', ['$event'] )
   unloadHandler( event: Event ){ 
-    // $event.returnValue='Your data will be lost!';   
-    sessionStorage.clear();
-    
+    sessionStorage.clear();    
     
   }
   
@@ -63,40 +60,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
       } )
     
     }
-
-    // if(DOMRect.top === 0)
-    // console.log("start Scroll");
-    
+ 
   }
 
-  ngOnInit(): void {
-    this.isSessionHomeVacia = sessionStorage.getItem('homeParameters') != null ? false : true;
-    // si tengo los datos en la session entonces no llamo al servicio inicial y pinto los valores de la  session
-    if(this.isSessionHomeVacia) {
-      this.peliculasService.getCartelera( this.paginaInicial)
-        .subscribe( resp =>{        
-          this.movies = resp.results;
-          this.MovieSlideshow = resp.results;
-          this.parametrosHome.movies =  resp.results;
-          this.parametrosHome.ultimaPagina = resp.page;
-          console.log("obtengo cartelera del servicio!!!");
-          
-          
-        });
-
-    }else{      
-      
-      this.jsonObject = JSON.parse( this.getDatosSessionStorage('homeParameters') );                  
-      this.parametrosHome = <HomeSession>this.jsonObject.homesession;    
-      this.movies = this.parametrosHome.movies;
-      
-      
-      
-      
-    
-      
-    }
-    
+  ngOnInit(): void {        
+    this.obtenerDatosCartelera();
 
   }
 
@@ -125,12 +93,32 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
 
-  onClickPeliculaVisitada( idPelicula: number ){
-
+ onClickPeliculaVisitada( idPelicula: number ){
     this.viewportScroller.scrollToAnchor( 'anchor_' + idPelicula);
- 
+ }
 
-}
+ obtenerDatosCartelera(){   
+    this.isSessionHomeVacia = sessionStorage.getItem('homeParameters') != null ? false : true;
+    // si tengo los datos en la session entonces no llamo al servicio inicial y pinto los valores de la  session
+    if(this.isSessionHomeVacia) {
+      this.peliculasService.getCartelera( this.paginaInicial)
+        .subscribe( resp =>{        
+          this.movies = resp.results;
+          this.MovieSlideshow = resp.results;
+          this.parametrosHome.movies =  resp.results;
+          this.parametrosHome.ultimaPagina = resp.page;
+          
+        });
+  
+    }else{            
+      this.jsonObject = JSON.parse( this.getDatosSessionStorage('homeParameters') );                  
+      this.parametrosHome = <HomeSession>this.jsonObject.homesession;    
+      this.movies = this.parametrosHome.movies;      
+    }
+
+ }
+
+
 
   
 

@@ -5,6 +5,7 @@ import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 import { catchError, map, tap } from "rxjs/operators";
 import { MovieDetailsResponse } from '../interfaces/movie-details-response';
 import { Cast, CreditsResponse } from '../interfaces/credits-response';
+import { LangTranslate } from '../interfaces/lang/Lang-translate';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,22 @@ export class PeliculasService {
   private carteleraPage: number;  
   private moviesPage: number = 1;
   private moviesBuffer:Movie[] = [];
+  private localLang: LangTranslate = {
+    languajeReqIdbMovie: 'es-ES',
+    languajeTranslate: 'es'
+  };
+  
 
   constructor( private http: HttpClient  ) {
-    this.carteleraPage = 1;
+    this.carteleraPage = 1;     
+    this._languageApp; 
    }
 
   
   get params() {
     return  {
       api_key: 'e97743a8e47b50c18195f4f928c36480',
-      language: 'es-ES',
+      language: this.localLang.languajeReqIdbMovie,
       page: this.carteleraPage.toString()
     }
   }
@@ -44,12 +51,8 @@ export class PeliculasService {
       );
     }
 
-   buscarPeliculas( textoBuscar: string, pageSolicitada: number ): Observable<CarteleraResponse> {
-     
+   buscarPeliculas( textoBuscar: string, pageSolicitada: number ): Observable<CarteleraResponse> {     
      const params = { ...this.params, page: pageSolicitada.toString(), query: textoBuscar };
-     
-     
-      
       return this.http.get<CarteleraResponse>(`${this.baseUrl}/search/movie`,{
         params: params
       }).pipe(
@@ -64,14 +67,12 @@ export class PeliculasService {
     this.carteleraPage = 1;
   }
 
-  getPeliculasDetalle( idMovie: string ) {    
-
+  getPeliculasDetalle( idMovie: string ) {
     return this.http.get<MovieDetailsResponse>(`${ this.baseUrl }/movie/${ idMovie }`,{
       params: this.params
     }).pipe(
       catchError( err => of( null ) )
     )
-
   }
 
   getCast( idMovie: string ): Observable<Cast[]>{
@@ -83,6 +84,21 @@ export class PeliculasService {
       catchError( err => of( [] ) )
     );
 
+  }
+  
+
+  public set _languageApp( languageObj: LangTranslate ){       
+    this.localLang = languageObj;
+
+  }
+
+  public get _languageApp(): LangTranslate{
+
+    if(localStorage.getItem('localeLang')){
+      var localLangJSONFromLS = localStorage.getItem('localeLang');
+      this.localLang = JSON.parse(localLangJSONFromLS);
+    }
+    return this.localLang;
   }
 
 }

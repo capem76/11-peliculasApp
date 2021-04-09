@@ -1,6 +1,9 @@
 export interface LangTranslate {
-    'home': Home;
-    'navbar': Navbar;
+    'home'?: Home;
+    'navbar'?: Navbar;
+    languajeTranslate: string;
+    languajeReqIdbMovie: string;
+    
 }
 
 export interface Home {
