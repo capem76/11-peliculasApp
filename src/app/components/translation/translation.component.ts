@@ -48,10 +48,14 @@ export class TranslationComponent implements OnInit {
       var jsonLangTranslate: LangTranslate = JSON.parse( localStorage.getItem('localeLang')  );
       this.translate.setDefaultLang( jsonLangTranslate.languajeTranslate );
       this.translate.use( jsonLangTranslate.languajeTranslate );
+      this.languageObj = jsonLangTranslate;
     }
     else{
       this.translate.setDefaultLang( 'es' );
       this.translate.use('es');
+      this.languageObj = {
+        languajeTranslate: 'es'
+      }      
 
     }
     

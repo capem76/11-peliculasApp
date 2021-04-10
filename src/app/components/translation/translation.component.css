@@ -7,3 +7,9 @@
     background-color: #272a36;
     color: white !important;
 }
+
+.active{
+    /* color: white; */
+    border-color: #f5dadf !important;    
+    color: #d3b8bd !important;    
+}
