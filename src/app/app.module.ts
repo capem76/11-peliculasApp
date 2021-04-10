@@ -7,10 +7,17 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//translate
+import { TranslateLoader, TranslateModule  } from "@ngx-translate/core";
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 
 
+export function HttpLoaderFactory( http: HttpClient ){
+  return new TranslateHttpLoader( http, './assets/i18n/', '.json' );  
+}
 
 @NgModule({
   declarations: [
@@ -22,12 +29,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ComponentsModule,
     PagesModule,
-    BrowserAnimationsModule
-    
+    BrowserAnimationsModule,
+    TranslateModule.forRoot(  {
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
     
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] 
 })
 export class AppModule { }

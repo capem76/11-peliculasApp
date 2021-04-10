@@ -1,15 +1,17 @@
-<h1>Cartelera</h1>
+<app-translation ></app-translation>
+
+<h1>{{ "home.cartelera"| translate }}</h1>
 
 <!-- <div (window:beforeunload)="unloadHandler"></div> -->
 <app-slideshow [movies]="movies" *ngIf="movies.length > 0"></app-slideshow>
 
-<h1 class="mt-5">Peliculas</h1>
+<h1 class="mt-5">{{ "home.peliculas"|translate }}</h1>
 <!-- <a (click)=onClickPeliculaVisitada(parametrosHome.movieIndexClick) *ngIf="parametrosHome.movieIndexClick != null" > pelicula visitada anterior </a> -->
 <button type="button" 
         class="btn btn-outline-primary mb-1" 
         (click)=onClickPeliculaVisitada(parametrosHome.movieIndexClick) 
         *ngIf="parametrosHome.movieIndexClick != null">
-        ir a film visitado: {{ movies[ parametrosHome.movieIndexClick ].title }}
+        {{ 'home.btnFilmVisitado'|translate }}: {{ movies[ parametrosHome.movieIndexClick ].title }}
 </button>
 
 <app-peliculas-poster-grid  [movieGridParameters]="parametrosHome" 

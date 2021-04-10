@@ -1,0 +1,21 @@
+
+{
+    "home": {
+       "btnFilmVisitado": "derniere film vu",
+       "cartelera": "panneau d'affichage",
+       "peliculas": "films"
+    },
+    "navbar":{
+        "link.peliculas": "films",
+        "input.buscar": "chercher des films",
+        "btn.buscar": "chercher"
+    },
+    "buscar": {
+        "buscarPeliculas": "chercher des films",
+        "totalResult": "total des résultats"
+
+    },
+    "pelicula": {
+        "btn.regresar": "revenir"
+    }
+}

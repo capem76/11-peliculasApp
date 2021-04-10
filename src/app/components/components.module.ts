@@ -12,6 +12,11 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { PeliculasGrid2Component } from './peliculas-grid2/peliculas-grid2.component';
 import { PeliculaCardComponent } from './pelicula-card/pelicula-card.component';
 import {MatCardModule} from '@angular/material/card';
+//shared
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+import { TranslationComponent } from './translation/translation.component';
+
+
 
 
 
@@ -19,14 +24,15 @@ import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
-  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent, PeliculasGrid2Component, PeliculaCardComponent],
+  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent, PeliculasGrid2Component, PeliculaCardComponent, TranslationComponent],
   imports: [
     CommonModule,
     RouterModule,
     RatingModule,
     PipesModule,
     ScrollingModule,
-    MatCardModule
+    MatCardModule,
+    SharedModuleModule
     
 
 
@@ -37,7 +43,8 @@ import {MatCardModule} from '@angular/material/card';
     PeliculasPosterGridComponent,
     CastSlideShowComponent,
     PeliculasGrid2Component,
-    PeliculaCardComponent
+    PeliculaCardComponent,
+    TranslationComponent
   ]
 })
 export class ComponentsModule { }

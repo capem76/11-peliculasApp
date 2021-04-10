@@ -1,31 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" routerLink="['/home']">Peliculas</a>
+        <a class="navbar-brand" routerLink="['/home']">{{"navbar.link.peliculas"| translate}}</a>
         <button class="navbar-toggler" 
                 type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#navbarSupportedContent" 
+                data-toggle="collapse" 
+                data-target="#navbarSupportedContent" 
                 aria-controls="navbarSupportedContent" 
                 aria-expanded="false" 
                 aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>        
         </button>
+        
+        
+      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            </ul>
-            <div class="d-flex">
-                <input  #txtBuscar
-                        (keyup.enter)="buscarPelicula( txtBuscar.value ) "
-                        class="form-control me-2" 
-                        type="search" 
-                        placeholder="Buscar Pelicula" 
-                        aria-label="Search">
+          <ul class="navbar-nav mr-auto">
+                
+          </ul>
+          <div class="form-inline my-2 my-lg-0">
+            <input #txtBuscar
+                   (keyup.enter)="buscarPelicula( txtBuscar.value ) "
+                   class="form-control mr-sm-2" 
+                   type="search" 
+                   [placeholder]="inputBuscar| translate" 
+                   aria-label="Search">
 
-                <button (click)="buscarPelicula( txtBuscar.value ) "
-                        class="btn btn-outline-success" 
-                        type="submit">Buscar
-                </button>
-            </div>
+            <button (click)="buscarPelicula( txtBuscar.value ) " 
+                    class="btn btn-outline-danger my-2 my-sm-0" 
+                    type="submit">{{ 'navbar.btn.buscar' |translate }}
+            </button>
+          </div>
         </div>
-    </div>
-</nav>
+      </nav>

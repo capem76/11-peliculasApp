@@ -1,0 +1,21 @@
+
+<div class="btn-group btn-group-sm mt-1 mb-1" role="group" aria-label="Basic example">
+    <button (click)="cambiarLenguaje('en')" 
+            type="button" 
+            class="btn btn-outline-danger"
+            [ngClass]="{'active': _languageObj.languajeTranslate === 'en'}">English
+    </button>
+    <button (click)="cambiarLenguaje('es')" 
+            type="button" 
+            class="btn btn-outline-danger"
+            [ngClass]="{'active': _languageObj.languajeTranslate === 'es'}">Español
+    </button>
+    <button (click)="cambiarLenguaje('fr')" 
+            type="button" 
+            class="btn btn-outline-danger"
+            [ngClass]="{'active': _languageObj.languajeTranslate === 'fr'}">Français
+    </button>
+</div>
+
+
+

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from "@ngx-translate/core";
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,24 +10,32 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor( private router: Router ) { }
+  inputBuscar: string = "navbar.input.buscar";
+
+  constructor( 
+          private router: Router,
+          private translate: TranslateService
+  ) { }
+  
 
   ngOnInit(): void {
+    
+    
   }
+
+
 
   buscarPelicula( textoBuscar: string ){
     textoBuscar = textoBuscar.trim();
     if (textoBuscar.length === 0) {
       return;
       
-    }
-    console.log(textoBuscar);
-    // this.router.navigate([`buscar/${textoBuscar}`]);
+    }    
     this.router.navigate(['/buscar', textoBuscar]);
 
-    
-
-
   }
+
+
+  
 
 }

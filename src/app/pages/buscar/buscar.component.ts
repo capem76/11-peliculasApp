@@ -1,6 +1,7 @@
 
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CarteleraResponse, Movie } from 'src/app/interfaces/cartelera-response';
 import { HelperService } from 'src/app/services/helper.service';
 import { PeliculasService } from 'src/app/services/peliculas.service';
@@ -25,10 +26,10 @@ export class BuscarComponent implements OnInit {
 
   constructor( private activatedRoute: ActivatedRoute,
                private peliculasServices: PeliculasService,
-               private helperService: HelperService) { }
+               private helperService: HelperService,
+               private translate: TranslateService) { }
 
   ngOnInit(): void {
-    // this.textoBuscar = this.activatedRoute.snapshot.params['texto'];
     
     this.activatedRoute.params.subscribe( params => {    
       this.textoBuscar = params.texto;
@@ -89,6 +90,14 @@ export class BuscarComponent implements OnInit {
 
 
   }
+
+  translateContenido( ): void {    
+    this.translate.get('navbar').subscribe( ( navbarValores: string) => {              
+      // this.inputBuscar =   navbarValores['input.buscar'];       
+       
+     });
+
+  } 
 
   
 
