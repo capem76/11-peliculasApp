@@ -37,15 +37,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit  {
   
   
   @HostListener( 'window:scroll', ['$event'] )
-  onScroll( ){
-    
+  onScroll( ){    
     const positionScroll = (document.documentElement.scrollTop || document.body.scrollTop) ;
-    const positionMaxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight) ;
+    const positionMaxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight)  ;    
     let endScroll: boolean = false;      
-    endScroll = (positionMaxScroll-positionScroll) === document.documentElement.clientHeight ? true : false;    
-  
+    endScroll = (positionMaxScroll-positionScroll) <= (document.documentElement.clientHeight + 150) ? true : false;    
+
     if (endScroll) {     
       //llamar servicio
+      console.log('fin scroll');
+      
       this.peliculasService.getCartelera( this.parametrosHome.ultimaPagina+1).subscribe( (resp) => {
         this.movies.push(...resp.results);        
         this.parametrosHome = {
