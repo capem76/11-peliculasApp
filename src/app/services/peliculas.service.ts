@@ -39,8 +39,7 @@ export class PeliculasService {
   getCartelera( paginaActual: number ):Observable<CarteleraResponse>{
     
     const params = {  ...this.params, page: paginaActual.toString() }
-
-    console.log("paginaActual: " + paginaActual);
+    
     return this.http.get<CarteleraResponse>(`${this.baseUrl}/movie/now_playing?`,{
         params: params
       }).pipe(

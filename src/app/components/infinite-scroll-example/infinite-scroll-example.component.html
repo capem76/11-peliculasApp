@@ -1,0 +1,23 @@
+
+
+<app-slideshow [movies]="arrayMovies" *ngIf="arrayMovies.length > 0"></app-slideshow>
+
+<h1 class="mt-5">{{ "home.peliculas"|translate }}</h1>
+
+<div    class="container" 
+        infiniteScroll 
+        [infiniteScrollDistance]="1.5"        
+        [infiniteScrollUpDistance]="2" 
+        (scrolledUp)="onScrollUp()"         
+        (scrolled)="onScroll()">
+
+    <app-peliculas-poster-grid  [movieGridParameters]="parametrosHome" 
+                            [movies]="arrayMovies" 
+                            *ngIf="arrayMovies.length > 0">
+    </app-peliculas-poster-grid>
+
+    <button [ngClass]="'no-hidden'"
+        *ngIf="showGoUpButton" 
+        class="btn btn-dark"
+        (click)="scrollTop()">GO UP</button>
+</div>
