@@ -18,6 +18,8 @@ import { TranslationComponent } from './translation/translation.component';
 import { InfiniteScrollExampleComponent } from './infinite-scroll-example/infinite-scroll-example.component';
 //ngx-infinite-scroll
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+//ngx-spinner
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -36,10 +38,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ScrollingModule,
     MatCardModule,
     SharedModuleModule,
-    InfiniteScrollModule
-
-    
-
+    InfiniteScrollModule,
+    NgxSpinnerModule
 
   ],
   exports: [

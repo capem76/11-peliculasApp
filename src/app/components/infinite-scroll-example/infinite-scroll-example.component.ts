@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Movie } from 'src/app/interfaces/cartelera-response';
 import { HomeSession } from 'src/app/interfaces/home-sesion';
 import { PeliculasService } from "../../services/peliculas.service";
@@ -8,7 +9,7 @@ import { PeliculasService } from "../../services/peliculas.service";
   templateUrl: './infinite-scroll-example.component.html',
   styleUrls: ['./infinite-scroll-example.component.css']
 })
-export class InfiniteScrollExampleComponent implements OnInit {
+export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
 
   
   private _finishPage = 10;  
@@ -23,18 +24,27 @@ export class InfiniteScrollExampleComponent implements OnInit {
   private _arrayMoviesAux: Movie[] = [];
   private totalPages: number;
   private page: number;
+  private notScrolly: boolean = true;
+  private _isNotEmptyMovies: boolean = true;  
+  private timeout: any;
   
   
 
-  constructor( private peliculaService: PeliculasService ) { 
+  constructor( private peliculaService: PeliculasService, private spinner: NgxSpinnerService ) { 
     this.actualPage = 1;
     this.paginaIncial = 1;
     this._showGoUpButton = false;
   }
-
+  
   
   ngOnInit() {  
-    this.addMovies();
+    this.addMoviesInicial();
+  }
+
+  ngOnDestroy(): void {    
+    clearTimeout(this.timeout);
+
+    
   }
 
   guardarArrayEnSession( array:Movie[] ){
@@ -48,34 +58,40 @@ export class InfiniteScrollExampleComponent implements OnInit {
     
   }
 
+  addMoviesInicial(){
+    this.peliculaService.getCartelera( 1 ).subscribe( resp => { 
+      this.arrayMovies.push(...resp.results);     
+    });
+  }
+
   
   addMovies(){    
     this.peliculaService.getCartelera( this.actualPage ).subscribe( resp => {                    
-      this.arrayMovies.push(...resp.results);
-      this.arrayMoviesAux = resp.results;
-      this.page = resp.page;
-      this.totalPages = resp.total_pages;
+      const newMovies:Movie[] = resp.results;      
+      this.spinner.hide();      
+      if( newMovies.length === 0 ){
+        this.isNotEmptyMovies = false;
+      }      
+      this.arrayMovies.push(...resp.results);        
+      this.notScrolly = true;  
     });
   }
 
   onScroll() {
-    console.log(`onsSroll`);
-    // if (this.actualPage < this.finishPage) {
-      this.actualPage ++;
-      this.addMovies();
-      console.log(`totalPages: ${this.totalPages} \n page:${this.page}`);
-      
-    // } else {
-    //   console.log('No more lines. Finish page!');
-    // }
+     if (this.notScrolly && this.isNotEmptyMovies) {                      
+        this.spinner.show();
+        this.notScrolly = false;
+         this.actualPage ++;
+         this.timeout = setTimeout( ()=>{
+           this.addMovies();    
+        }, 1000 );
+         
+     }
   }
 
   onScrollUp(){
-    console.log("scrolling up");
-    
-
-    if( this.actualPage > this.paginaIncial  ) {
-      // this.actualPage --;
+    console.log("scrolling up"); 
+    if( this.actualPage > this.paginaIncial  ) {      
       console.log(`pagina actual: ${this.actualPage}`);
       
     }
@@ -87,8 +103,8 @@ export class InfiniteScrollExampleComponent implements OnInit {
     document.body.scrollTop = 0; // Safari
     document.documentElement.scrollTop = 0; // Other
   }
-
-  @HostListener('window:scroll', [])
+// @HostListener('scroll', ['$event']) // for scroll events of the current element
+  @HostListener('window:scroll', []) //for window scroll events
     onWindowScroll() {
       if (( window.pageYOffset ||
              document.documentElement.scrollTop || 
@@ -162,6 +178,13 @@ export class InfiniteScrollExampleComponent implements OnInit {
   }
   public set arrayMoviesAux(value: Movie[]) {
     this._arrayMoviesAux = value;
+  }
+
+  public get isNotEmptyMovies(): boolean {
+    return this._isNotEmptyMovies;
+  }
+  public set isNotEmptyMovies(value: boolean) {
+    this._isNotEmptyMovies = value;
   }
 
  
