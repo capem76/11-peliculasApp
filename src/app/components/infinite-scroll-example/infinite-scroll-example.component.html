@@ -1,0 +1,50 @@
+
+
+<app-slideshow [movies]="arrayMovies" *ngIf="arrayMovies.length > 0"></app-slideshow>
+
+<h1 class="mt-5">{{ "home.peliculas"|translate }}</h1>
+<div class="container">
+    <div     
+            infiniteScroll 
+            [infiniteScrollDistance]="1.5"        
+            [infiniteScrollUpDistance]="1" 
+            (scrolledUp)="onScrollUp()"         
+            (scrolled)="onScroll()">
+        <div class="row pt-5">
+            <app-peliculas-poster-grid  [movieGridParameters]="parametrosHome" 
+                                    [movies]="arrayMovies" 
+                                    *ngIf="arrayMovies.length > 0">
+            </app-peliculas-poster-grid>
+        
+            
+            <button [ngClass]="'no-hidden'"
+            *ngIf="showGoUpButton" 
+            class="btn btn-dark"
+            (click)="scrollTop()">GO UP</button>
+        </div>    
+    </div>
+    <!-- spinner -->
+    <div class="row pb-5"> 
+        <div class="col-md-12 p-5">
+            <ngx-spinner                
+                bdColor= "RGBA(20,22,30,1)"
+                size = "default"
+                color = "#581f87"
+                type = "ball-pulse-sync"
+                [fullScreen] = "false"
+            >
+
+            </ngx-spinner>
+        </div>
+
+    </div>
+    <div class="row pb-5" *ngIf="!isNotEmptyMovies">
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="text-muted h6 alert alert-secondary p-2">
+                no more films to show
+            </div>
+
+        </div>
+    </div>
+
+</div>

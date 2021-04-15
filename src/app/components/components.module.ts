@@ -15,6 +15,11 @@ import {MatCardModule} from '@angular/material/card';
 //shared
 import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { TranslationComponent } from './translation/translation.component';
+import { InfiniteScrollExampleComponent } from './infinite-scroll-example/infinite-scroll-example.component';
+//ngx-infinite-scroll
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+//ngx-spinner
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -24,7 +29,7 @@ import { TranslationComponent } from './translation/translation.component';
 
 
 @NgModule({
-  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent, PeliculasGrid2Component, PeliculaCardComponent, TranslationComponent],
+  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent, CastSlideShowComponent, PeliculasGrid2Component, PeliculaCardComponent, TranslationComponent, InfiniteScrollExampleComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -32,9 +37,9 @@ import { TranslationComponent } from './translation/translation.component';
     PipesModule,
     ScrollingModule,
     MatCardModule,
-    SharedModuleModule
-    
-
+    SharedModuleModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule
 
   ],
   exports: [
@@ -44,7 +49,8 @@ import { TranslationComponent } from './translation/translation.component';
     CastSlideShowComponent,
     PeliculasGrid2Component,
     PeliculaCardComponent,
-    TranslationComponent
+    TranslationComponent,
+    InfiniteScrollExampleComponent
   ]
 })
 export class ComponentsModule { }

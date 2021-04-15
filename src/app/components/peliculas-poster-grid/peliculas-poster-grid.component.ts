@@ -41,7 +41,7 @@ export class PeliculasPosterGridComponent implements OnInit, AfterViewInit, Afte
   onMovieClick( movie:Movie, indexId: number ){
     if(this.movieGridParameters){
       this.movieGridParameters.movieIndexClick = indexId;         
-      this.guardoDatosSessionStorage(this.movieGridParameters);
+      // this.guardoDatosSessionStorage(this.movieGridParameters);
     }
     
     
